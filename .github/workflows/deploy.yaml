@@ -23,6 +23,7 @@ jobs:
 
       - run: |
           conda env list
+          conda activate simple_bees
           conda list
       - name: Run Python code
         run: python main.py
