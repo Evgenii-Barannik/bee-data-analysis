@@ -21,7 +21,9 @@ jobs:
           python-version: 3.10.14
 
       - run: |
-          conda info
+          conda env list
+          conda init
+          conda activate simple_bees
           conda list
       - name: Run Python code
         run: python main.py
