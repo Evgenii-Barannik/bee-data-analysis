@@ -1,4 +1,4 @@
-name: deploy
+name: deploy simple_bees
 
 on:
   push:
@@ -13,20 +13,17 @@ jobs:
 
     steps:
       - name: Checkout code
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
-      - name: Conda set up
       - uses: conda-incubator/setup-miniconda@v3
         with:
           environment-file: environment.yml
-          python-version: "3.10.14"
-      - run: conda info
-      - run: conda list
-      - run: conda config --show
 
+      - run: |
+          conda info
+          conda list
       - name: Run Python code
         run: python main.py
-
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
