@@ -21,7 +21,6 @@ jobs:
           python-version: 3.10.14
           activate-environment: simple_bees
           auto-activate-base: false
-
       - run: |
           conda env list
           conda activate simple_bees
