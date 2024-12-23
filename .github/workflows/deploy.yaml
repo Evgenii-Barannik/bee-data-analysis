@@ -23,27 +23,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-conda-
 
-      - name: Set up Miniconda
-        uses: conda-incubator/setup-miniconda@v2
+      - uses: conda-incubator/setup-miniconda@v3
         with:
-          miniconda-version: 'latest'
-          auto-update-conda: true
+          activate-environment: simple_bees
           environment-file: environment.yml
-          create-environment: false
 
-      - name: Initialize Conda
-        run: |
-          source $HOME/miniconda3/etc/profile.d/conda.sh
-          conda init bash
-
-      - name: Install dependencies
-        run: |
-          conda env update --file environment.yml --name base
+      # - name: Install dependencies
+      #   run: |
+      #     conda env update --file environment.yml --name base
 
       - name: Run Python code
         run: |
-          source $HOME/miniconda3/etc/profile.d/conda.sh
-          conda activate myenv
           python main.py
 
       - name: Deploy to GitHub Pages
