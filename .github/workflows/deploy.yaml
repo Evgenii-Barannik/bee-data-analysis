@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '45 * * * *'  # Run every hour at minute 45
+    - cron: '45 * * * *' # Run every hour at minute 45
 
 jobs:
   deploy:
@@ -15,26 +15,29 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Cache pip dependencies
+      - name: Cache Conda environment
         uses: actions/cache@v2
         with:
-          path: ~/.cache/pip  # Cache pip dependencies
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}  # Cache key is based on the requirements.txt file
+          path: ~/.conda
+          key: ${{ runner.os }}-conda-${{ hashFiles('environment.yml') }}
           restore-keys: |
-            ${{ runner.os }}-pip-
+            ${{ runner.os }}-conda-
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v2
         with:
-          python-version: '3.10.14'
+          miniconda-version: 'latest'
+          auto-update-conda: true
+          environment-file: environment.yml
+          create-environment: false
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          conda env update --file environment.yml --name base
 
       - name: Run Python code
         run: |
+          conda activate myenv
           python main.py
 
       - name: Deploy to GitHub Pages
