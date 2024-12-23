@@ -13,18 +13,11 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Cache Conda environment
-        uses: actions/cache@v2
-        with:
-          path: ~/.conda
-          key: ${{ runner.os }}-conda-${{ hashFiles('environment.yml') }}
-          restore-keys: |
-            ${{ runner.os }}-conda-
+      - uses: actions/checkout@v4
 
       - uses: conda-incubator/setup-miniconda@v3
         with:
+          python-version: 3.10.14
           environment-file: environment.yml
 
       - run: |
