@@ -28,11 +28,15 @@ jobs:
           activate-environment: simple_bees
           environment-file: environment.yml
 
+      - name: Conda init
+        run: conda init
+
       - name: Activate Conda environment
         run: conda activate simple_bees
 
       - name: Run Python code
         run: |
+        
           python main.py
 
       - name: Deploy to GitHub Pages
