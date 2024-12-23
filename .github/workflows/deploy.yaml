@@ -33,7 +33,7 @@ jobs:
 
       - name: Initialize Conda
         run: |
-          source ~/miniconda3/etc/profile.d/conda.sh
+          source /opt/hostedtoolcache/miniconda3/conda.sh
           conda init bash
 
       - name: Install dependencies
@@ -42,7 +42,7 @@ jobs:
 
       - name: Run Python code
         run: |
-          source ~/miniconda3/etc/profile.d/conda.sh
+          source /opt/hostedtoolcache/miniconda3/conda.sh
           conda activate myenv
           python main.py
 
