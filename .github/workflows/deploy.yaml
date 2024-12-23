@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '45 * * * *' # Run every hour at minute 45
+    - cron: '45 * * * *'
 
 jobs:
   deploy:
@@ -31,12 +31,18 @@ jobs:
           environment-file: environment.yml
           create-environment: false
 
+      - name: Initialize Conda
+        run: |
+          source ~/miniconda3/etc/profile.d/conda.sh
+          conda init bash
+
       - name: Install dependencies
         run: |
           conda env update --file environment.yml --name base
 
       - name: Run Python code
         run: |
+          source ~/miniconda3/etc/profile.d/conda.sh
           conda activate myenv
           python main.py
 
