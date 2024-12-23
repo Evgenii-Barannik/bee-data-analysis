@@ -25,18 +25,17 @@ jobs:
 
       - uses: conda-incubator/setup-miniconda@v3
         with:
-          activate-environment: simple_bees
           environment-file: environment.yml
 
-      - name: Conda init
-        run: conda init
+      - run: |
+          conda info
+          conda list
 
       - name: Activate Conda environment
         run: conda activate simple_bees
 
       - name: Run Python code
         run: |
-        
           python main.py
 
       - name: Deploy to GitHub Pages
