@@ -28,9 +28,8 @@ jobs:
           activate-environment: simple_bees
           environment-file: environment.yml
 
-      # - name: Install dependencies
-      #   run: |
-      #     conda env update --file environment.yml --name base
+      - name: Activate Conda environment
+        run: conda activate simple_bees
 
       - name: Run Python code
         run: |
