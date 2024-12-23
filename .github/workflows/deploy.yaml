@@ -31,9 +31,6 @@ jobs:
           conda info
           conda list
 
-      - name: Activate Conda environment
-        run: conda activate simple_bees
-
       - name: Run Python code
         run: |
           python main.py
