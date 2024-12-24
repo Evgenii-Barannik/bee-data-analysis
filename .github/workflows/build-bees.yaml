@@ -37,6 +37,9 @@ jobs:
           conda list
       - name: Run Python code
         run: python main.py
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
         
   deploy:
     environment:
